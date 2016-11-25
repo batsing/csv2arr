@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<meta charset="utf8"/>
+
+<h3>请按F12打开浏览器控制台</h3>
+<h3>Press F12 to open the console</h3>
+
+<a href="./test.csv" >点击下载示例csv</a><br /><br /><br />
+
+<input type="file" name="csvfile" />
+<input type="button" onclick="csv()" value="JS转换"/>
+
+<br /><br /><br />
+<div id="resTbl"></div>
+
+<script src="./lib/jquery.js"></script>
+<script src="./lib/papaparse.js"></script>
+<script src="./lib/jschardet.js"></script>
+<!--[if lte IE 9]>
+	<script src="./lib/base64.js"></script>
+<![endif]-->
+
+<script src="csv2arr.js"></script>
+<script>
+
+function csv(){
+	$("input[name=csvfile]").csv2arr(function(arr){
+		console.log( arr );
+		//something to do here
+		var tblStr = "<table border='1'>";
+		$.each( arr, function(i, line){
+			tblStr += "<tr>";
+			$.each( line, function(i, cell){
+				tblStr += "<td>"+cell+"</td>";
+			});
+			tblStr += "</tr>";
+		});
+		$("#resTbl").html( tblStr );
+	});
+}
+</script>
+
+</html>
