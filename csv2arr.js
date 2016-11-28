@@ -2,6 +2,10 @@
  * csv file to 2D arr
  * */
 $.fn.csv2arr = function( callback ){
+	if( typeof(FileReader) == 'undefined' ){	//if not H5
+		alert("IE9及以下浏览器不支持，请使用Chrome或Firefox浏览器\nYour browser is too old,please use Chrome or Firefox");
+		return false;
+	}
 	if( ! $(this)[0].files[0]){
 		alert("请选择文件\nPlease select a file");
 		return false;
